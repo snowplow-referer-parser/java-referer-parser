@@ -20,11 +20,10 @@ public class ParserTest {
   private Parser parser;
 
   @Before
-  public void createParser() throws CorruptYamlException, IOException {
+  public void createParser() throws CorruptYamlException {
     parser = new Parser();
   }
 
-  // TODO: move failing-tests.json to referer-tests.json, update the Parser implementation to handle those cases
   @Test
   public void refererTests() throws MalformedURLException, JSONException {
     JSONTokener tok = new JSONTokener( ParserTest.class.getResourceAsStream("/referer-tests.json"));

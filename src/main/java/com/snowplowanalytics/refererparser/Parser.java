@@ -20,8 +20,6 @@ package com.snowplowanalytics.refererparser;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -135,6 +133,7 @@ public class Parser {
     // 2. Have an algo for stripping subdomains before checking match
     if (host == null) return null; // Not a valid URL
     if (host.equals(pageHost)) return new Referer(Medium.INTERNAL, null, null);
+    if (stripSubDomains(host).equals(pageHost)) return new Referer(Medium.INTERNAL, null, null);
     for (String s : internalDomains) {
       if (s.trim().equals(host))
         return new Referer(Medium.INTERNAL, null, null);
@@ -154,6 +153,15 @@ public class Parser {
       final String term = (referer.medium == Medium.SEARCH) ? extractSearchTerm(query, referer.parameters) : null;
       return new Referer(referer.medium, referer.source, term);
     }
+  }
+
+  private String stripSubDomains(String host) {
+    String[] urlSegments = host.split("\\.");
+    int length = urlSegments.length;
+    if (length > 3){
+      return String.format("%s.%s.%s",urlSegments[0], urlSegments[length-2], urlSegments[length-1]);
+    }
+    return host;
   }
 
   /**

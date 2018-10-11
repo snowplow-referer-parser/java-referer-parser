@@ -1,0 +1,18 @@
+[
+  {
+    "spec": "Internal subdomain HTTP",
+    "uri": "http://www.subdomain1.snowplowanalytics.com/account/profile",
+    "medium": "internal",
+    "source": null,
+    "term": null,
+    "known": false
+  },
+  {
+    "spec": "Internal subdomain HTTPS",
+    "uri": "http://www.subdomain2.snowplowanalytics.com/account/profile",
+    "medium": "internal",
+    "source": null,
+    "term": null,
+    "known": false
+  }
+]

@@ -57,8 +57,8 @@ Then add into your project's `pom.xml`:
 ```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
-    <artifactId>referer-parser_2.11</artifactId>
-    <version>0.3.0</version>
+    <artifactId>java-referer-parser</artifactId>
+    <version>0.4.0</version>
 </dependency>
 ```
 
@@ -85,3 +85,4 @@ limitations under the License.
 
 [referer-parser]: https://github.com/snowplow/referer-parser
 [referers-yml]: https://github.com/snowplow/referer-parser/blob/master/referers.yml
+[license]: http://www.apache.org/licenses/LICENSE-2.0

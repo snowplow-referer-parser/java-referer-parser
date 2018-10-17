@@ -1,10 +1,13 @@
 plugins {
     id 'java'
-    id 'maven-publish'
+    id 'maven'
+    id 'signing'
 }
 
 group = 'com.snowplowanalytics'
+archivesBaseName = 'java-referer-parser'
 version = '0.4.0'
+
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
@@ -19,18 +22,66 @@ dependencies {
     testCompile 'org.json:json:20180813'
 }
 
-publishing {
-    publications {
-        mavenJava( MavenPublication ) {
-            from components.java
-        }
-    }
+// maven release configuration is based on the official docs: https://central.sonatype.org/pages/gradle.html
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
     repositories {
-        maven {
-            url 'http://maven.snplow.com/releases/'
-            credentials {
-                username 'username'
-                password 'password'
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Java Referer Parser'
+                packaging 'jar'
+                
+                description 'This is the Java implementation of referer-parser, the library for extracting attribution data from referer (sic) URLs.'
+                url 'https://github.com/snowplow-referer-parser/java-referer-parser'
+
+                scm {
+                    connection 'https://github.com/snowplow-referer-parser/java-referer-parser.git'
+                    developerConnection 'https://github.com/snowplow-referer-parser/java-referer-parser.git'
+                    url 'https://github.com/snowplow-referer-parser/java-referer-parser'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'alexanderdean'
+                        name 'Alexander Dean'
+                        email 'alex@snowplowanalytics.com'
+                    }
+                }
             }
         }
     }

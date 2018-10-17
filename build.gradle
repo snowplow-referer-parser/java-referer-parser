@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'com.snowplowanalytics'
@@ -16,4 +17,21 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient:4.5.3'
     testCompile 'junit:junit:4.12'
     testCompile 'org.json:json:20180813'
+}
+
+publishing {
+    publications {
+        mavenJava( MavenPublication ) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url 'http://maven.snplow.com/releases/'
+            credentials {
+                username 'username'
+                password 'password'
+            }
+        }
+    }
 }

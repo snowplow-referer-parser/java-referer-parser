@@ -37,7 +37,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 /**
  * Java implementation of <a href="https://github.com/snowplow/referer-parser">Referer Parser</a>
  *
- * @author Alex Dean (@alexatkeplar) <support at snowplowanalytics com>
+ * @author Alex Dean (@alexatkeplar)
  */
 public class Parser {
 

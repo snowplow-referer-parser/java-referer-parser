@@ -21,7 +21,7 @@ package com.snowplowanalytics.refererparser;
  * that we can detect - "medium"
  * in Google's language.
  *
- * @author Alex Dean (@alexatkeplar) <support at snowplowanalytics com>
+ * @author Alex Dean (@alexatkeplar)
  */
 public enum Medium {
     UNKNOWN,

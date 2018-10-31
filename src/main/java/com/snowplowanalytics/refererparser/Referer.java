@@ -21,7 +21,7 @@ import java.util.Objects;
 /**
  * Referer data class
  *
- * @author Alex Dean (@alexatkeplar) <support at snowplowanalytics com>
+ * @author Alex Dean (@alexatkeplar)
  */
 public class Referer {
   public final Medium medium;

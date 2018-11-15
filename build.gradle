@@ -23,27 +23,28 @@ dependencies {
 }
 
 bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_API_KEY')
+    user = System.getenv('BINTRAY_SNOWPLOW_MAVEN_USER')
+    key = System.getenv('BINTRAY_SNOWPLOW_MAVEN_API_KEY')
 
     pkg {
         repo = 'snowplow-maven'
         name = archivesBaseName
+        userOrg = 'snowplow'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/snowplow-referer-parser/java-referer-parser.git'
+        version {
+            name = '0.4.0-rc1'
+            gpg {
+                sign = true
+            }
+            mavenCentralSync {
+                sync = true
+                user = System.getenv('SONA_USER')
+                password = System.getenv('SONA_PASS')
+            }
+        }
     }
     publications = ['mavenJava']
-    version {
-        name = version
-        gpg {
-            sign = true
-        }
-        mavenCentralSync {
-            sync = true
-            user = System.getenv('SONA_USER')
-            password = System.getenv('SONA_PASS')
-        }
-    }
 }
 
 task javadocJar(type: Jar) {

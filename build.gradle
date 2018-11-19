@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.snowplowanalytics'
 archivesBaseName = 'java-referer-parser'
-version = '0.4.0-rc1'
+version = '0.4.0-rc2'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -33,7 +33,7 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/snowplow-referer-parser/java-referer-parser.git'
         version {
-            name = '0.4.0-rc1'
+            name = '0.4.0-rc2'
             gpg {
                 sign = true
             }

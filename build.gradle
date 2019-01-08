@@ -26,9 +26,11 @@ bintray {
     user = System.getenv('BINTRAY_SNOWPLOW_MAVEN_USER')
     key = System.getenv('BINTRAY_SNOWPLOW_MAVEN_API_KEY')
 
+    publications = ['ParserPublication']
+
     pkg {
         repo = 'snowplow-maven'
-        name = archivesBaseName
+        name = 'java-referer-parser'
         userOrg = 'snowplow'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/snowplow-referer-parser/java-referer-parser.git'
@@ -44,7 +46,6 @@ bintray {
             }
         }
     }
-    publications = ['mavenJava']
 }
 
 task javadocJar(type: Jar) {
@@ -83,13 +84,13 @@ def pomConfig = {
 // Create the publication with the pom configuration:
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        ParserPublication(MavenPublication) {
             from components.java
             artifact sourcesJar
             artifact javadocJar
-            groupId group
+            groupId 'com.snowplowanalytics'
             artifactId 'java-referer-parser'
-            version version
+            version '0.4.0-rc5'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'This is the Java implementation of referer-parser, the library for extracting attribution data from referer (sic) URLs.')

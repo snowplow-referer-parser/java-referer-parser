@@ -28,6 +28,8 @@ bintray {
 
     publications = ['ParserPublication']
 
+    publish = true
+
     pkg {
         repo = 'snowplow-maven'
         name = 'java-referer-parser'

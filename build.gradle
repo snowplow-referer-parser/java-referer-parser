@@ -43,6 +43,7 @@ bintray {
                 sync = true
                 user = System.getenv('SONA_USER')
                 password = System.getenv('SONA_PASS')
+                close = '1'
             }
         }
     }

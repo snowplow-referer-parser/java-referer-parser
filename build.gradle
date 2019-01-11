@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.snowplowanalytics'
 archivesBaseName = 'java-referer-parser'
-version = '0.4.0-rc2'
+version = '0.4.0-rc3'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -37,7 +37,7 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/snowplow-referer-parser/java-referer-parser.git'
         version {
-            name = '0.4.0-rc2'
+            name = '0.4.0-rc3'
             gpg {
                 sign = true
             }
@@ -93,7 +93,7 @@ publishing {
             artifact javadocJar
             groupId 'com.snowplowanalytics'
             artifactId 'java-referer-parser'
-            version '0.4.0-rc2'
+            version '0.4.0-rc3'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'This is the Java implementation of referer-parser, the library for extracting attribution data from referer (sic) URLs.')

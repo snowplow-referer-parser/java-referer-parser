@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.snowplowanalytics'
 archivesBaseName = 'java-referer-parser'
-version = '0.4.0'
+version = '0.4.0-rc4'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -23,25 +23,30 @@ dependencies {
 }
 
 bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_API_KEY')
+    user = System.getenv('BINTRAY_SNOWPLOW_MAVEN_USER')
+    key = System.getenv('BINTRAY_SNOWPLOW_MAVEN_API_KEY')
+
+    publications = ['ParserPublication']
+
+    publish = true
 
     pkg {
         repo = 'snowplow-maven'
-        name = archivesBaseName
+        name = 'java-referer-parser'
+        userOrg = 'snowplow'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/snowplow-referer-parser/java-referer-parser.git'
-    }
-    publications = ['mavenJava']
-    version {
-        name = version
-        gpg {
-            sign = true
-        }
-        mavenCentralSync {
-            sync = true
-            user = System.getenv('SONA_USER')
-            password = System.getenv('SONA_PASS')
+        version {
+            name = '0.4.0-rc4'
+            gpg {
+                sign = true
+            }
+            mavenCentralSync {
+                sync = true
+                user = System.getenv('SONA_USER')
+                password = System.getenv('SONA_PASS')
+                close = '1'
+            }
         }
     }
 }
@@ -82,13 +87,13 @@ def pomConfig = {
 // Create the publication with the pom configuration:
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        ParserPublication(MavenPublication) {
             from components.java
             artifact sourcesJar
             artifact javadocJar
-            groupId group
+            groupId 'com.snowplowanalytics'
             artifactId 'java-referer-parser'
-            version version
+            version '0.4.0-rc4'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'This is the Java implementation of referer-parser, the library for extracting attribution data from referer (sic) URLs.')

@@ -7,7 +7,7 @@ pwd
 
 project_version=`cat VERSION`
 if [ "${project_version}" == "${tag_version}" ]; then
-    ./gradlew bintrayUpload
+    ./gradlew bintrayUpload --stacktrace --debug
 else
     echo "Tag version '${tag_version}' doesn't match version in project ('${project_version}'). Aborting!"
     exit 1

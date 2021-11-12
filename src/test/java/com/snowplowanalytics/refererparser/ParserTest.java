@@ -66,4 +66,24 @@ public class ParserTest {
     result = parser.parse(new URL(u), ref);
     assertEquals("URL, String", expected, result.toString());
   }
+
+  @Test
+  public void schemeTest() throws URISyntaxException {
+    // Test different supported schemes
+    String ref = "m.facebook.com";
+    String u = "www.example.com";
+    String expected = "{medium: social, source: Facebook, term: null}";
+
+    // http
+    Referer result = parser.parse(new URI("http://"+ref), new URI(u));
+    assertEquals("http", expected, result.toString());
+
+    // https
+    result = parser.parse(new URI("https://"+ref), new URI(u));
+    assertEquals("https", expected, result.toString());
+
+    // android-app
+    result = parser.parse(new URI("android-app://"+ref), new URI(u));
+    assertEquals("android-app", expected, result.toString());
+  }
 }

@@ -125,7 +125,7 @@ public class Parser {
 
   private Referer parse(String scheme, String host, String path, String query, String pageHost, List<String> internalDomains){
 
-    if (scheme == null || (!scheme.equals("http") && !scheme.equals("https"))) return null;
+    if (scheme == null || (!scheme.equals("http") && !scheme.equals("https") && !scheme.equals("android-app"))) return null;
 
     // Internal link if hosts match exactly
     // TODO: would also be nice to:

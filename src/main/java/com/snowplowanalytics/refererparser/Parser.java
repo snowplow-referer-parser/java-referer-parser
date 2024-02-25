@@ -28,6 +28,7 @@ import java.util.Collections;
 
 // SnakeYAML
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 // Apache URLEncodedUtils
@@ -240,7 +241,7 @@ public class Parser {
    */
   private Map<String,RefererLookup> loadReferers(InputStream referersYaml) throws CorruptYamlException {
 
-    Yaml yaml = new Yaml(new SafeConstructor());
+    Yaml yaml = new Yaml(new SafeConstructor(new LoaderOptions()));
     Map<String,Map<String,Map>> rawReferers = yaml.load(referersYaml);
 
     // This will store all of our referers
